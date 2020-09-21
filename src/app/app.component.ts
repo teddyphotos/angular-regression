@@ -25,10 +25,8 @@ export class AppComponent {
   pivotY = 0
   startX = 0
   startY = 0
+  trainingSet: [1,2];
   
-  
-  
-
 
 
   ngOnInit(){
@@ -43,7 +41,7 @@ export class AppComponent {
   }
 
 
-
+  
   clearGraph(): void{
     var canvas =  document.querySelector('canvas');
     var context = canvas.getContext('2d');
@@ -54,8 +52,26 @@ export class AppComponent {
   getRandomInt(max): number{
     return Math.floor(Math.random() * Math.floor(max));
   }
+
+  startPaint(e): void{
+      // Getting the canvas coordinates
+      var pos = this.getMousePos(this.canvas, e);
+      var x = pos.x;
+      var y = pos.y;
+      var X = (x-30)/30
+      var Y = (y-(this.canvasHeight-30))/(-30)
+      this.context.arc(x,y,this.myModel,0,Math.PI*2,false);
+      this.context.stroke();
+      this.context.fill();
+      this.context.beginPath();
+      console.log("(x,y) = ", "(",X,",",Y,")");
+      console.log("Training Set is ",this.trainingSet);
+
+
+      
+  }
   
-  // OLD START PAINT FUNCTION TO PAINT ON CANVAS
+  // OLD START PAINT FUNCTION TO PAINT ON CANVAS -x-x-x-x--x-x-x-xx--x-x-x
   // startPaint(e): void{
   //     this.shouldPaint = true;
   //     this.paint(e);
@@ -84,56 +100,55 @@ export class AppComponent {
 
 
   // NEW START PAINT FUNCTION TO MOVE GRID -------------------------------
-  startPaint(e): void{
-    this.shouldPaint = true;
-    this.context.strokeStyle="#eeeeee";
-    this.context.lineWidth = 1;
-    var pos = this.getMousePos(this.canvas, e);
-    this.pivotX = pos.x;
-    this.pivotY = pos.y;
-  }
+  // startPaint(e): void{
+  //   this.shouldPaint = true;
+  //   this.context.strokeStyle="#eeeeee";
+  //   this.context.lineWidth = 1;
+  //   var pos = this.getMousePos(this.canvas, e);
+  //   this.pivotX = pos.x;
+  //   this.pivotY = pos.y;
+  // }
 
 
-  stopPaint(e): void{
-    this.shouldPaint = false; 
-    var pos = this.getMousePos(this.canvas, e);
-    let diffX = pos.x - this.pivotX;
-    let diffY = pos.y - this.pivotY; 
-    this.startX = this.startX + diffX;
-    this.startY = this.startY + diffY;
+  // stopPaint(e): void{
+  //   this.shouldPaint = false; 
+  //   var pos = this.getMousePos(this.canvas, e);
+  //   let diffX = pos.x - this.pivotX;
+  //   let diffY = pos.y - this.pivotY; 
+  //   this.startX = this.startX + diffX;
+  //   this.startY = this.startY + diffY;
+  // }
+
+
+  // This Paint method redraws the entire grid everytime the user moves the mouse
+  // To user it appears as if he is moving the grid
+  // paint(e): void{
+  //   if (!this.shouldPaint){
+  //     return;
+  //   }
+  //   this.context.clearRect(0,0, this.canvas.width, this.canvas.height);
+
+  //   var pos = this.getMousePos(this.canvas, e);
+  //   let diffX = pos.x - this.pivotX;
+  //   let diffY = pos.y - this.pivotY;
+
+  //   this.context.strokeStyle="#eeeeee";
+  //   this.context.lineWidth = 1;
     
-  }
+  //   for (let i = (this.startX+(diffX%30))%30; i < this.canvas.offsetWidth; i+=30) { 
+  //     this.context.moveTo(i,0);
+  //     this.context.lineTo(i, this.canvas.offsetHeight);
+  //     this.context.stroke()
+  //   }
+  //   for (let i = (this.startY+(diffY%30))%30; i < this.canvas.offsetHeight; i+=30) {
+  //     this.context.moveTo(0,i);
+  //     this.context.lineTo(this.canvas.offsetWidth, i);
+  //     this.context.stroke()
+  //   }
 
-  paint(e): void{
-    if (!this.shouldPaint){
-      return;
-    }
-
+  //   this.context.beginPath()
     
-    
-    this.context.clearRect(0,0, this.canvas.width, this.canvas.height);
-
-    var pos = this.getMousePos(this.canvas, e);
-    let diffX = pos.x - this.pivotX;
-    let diffY = pos.y - this.pivotY;
-
-    this.context.strokeStyle="#eeeeee";
-    this.context.lineWidth = 1;
-    
-    for (let i = (this.startX+(diffX%30))%30; i < this.canvas.offsetWidth; i+=30) { 
-      this.context.moveTo(i,0);
-      this.context.lineTo(i, this.canvas.offsetHeight);
-      this.context.stroke()
-    }
-    for (let i = (this.startY+(diffY%30))%30; i < this.canvas.offsetHeight; i+=30) {
-      this.context.moveTo(0,i);
-      this.context.lineTo(this.canvas.offsetWidth, i);
-      this.context.stroke()
-    }
-
-    this.context.beginPath()
-    
-  }
+  // }
 
 
 
@@ -151,24 +166,59 @@ export class AppComponent {
   
 
 
-  
-
-
-  
   paintGrid(): void{
     this.context.strokeStyle="#eeeeee";
     this.context.lineWidth = 1;
+    this.context.font = "16px Arial";
     
+    // This generates Verticle lines with coordinates
+    var x_coordinate = 0
     for (let i = 0; i < this.canvas.offsetWidth; i+=30) { 
       this.context.moveTo(i,0);
-      this.context.lineTo(i, this.canvas.offsetHeight);
-      this.context.stroke()
+      if (i != 0){
+        // This generates number line on bottom of screen
+        this.context.lineTo(i, this.canvas.offsetHeight-32);
+        this.context.stroke();
+        if (x_coordinate>9){
+          this.context.fillText(x_coordinate, i-10, this.canvas.offsetHeight-14);
+        }else if(x_coordinate == 0){
+          this.context.fillText(x_coordinate, i-14, this.canvas.offsetHeight-14);
+          this.context.moveTo(i,this.canvas.offsetHeight-32);
+          this.context.lineTo(i, this.canvas.offsetHeight-16+4);
+          this.context.stroke()
+        }else{
+          this.context.fillText(x_coordinate, i-4, this.canvas.offsetHeight-14);
+        }
+        this.context.moveTo(i,this.canvas.offsetHeight-16+4);
+        this.context.lineTo(i, this.canvas.offsetHeight);
+        this.context.stroke()
+      }else{
+        // i is 0
+        this.context.lineTo(i, this.canvas.offsetHeight);
+        this.context.stroke()
+        x_coordinate -= 1
+      }
+      x_coordinate += 1;
     }
-    for (let i = 0; i < this.canvas.offsetHeight; i+=30) {
-      this.context.moveTo(0,i);
-      this.context.lineTo(this.canvas.offsetWidth, i);
+    
+    // This generates Horizontal lines with coordinates
+    var y_coordinate = 0;
+    for (let j = this.canvas.offsetHeight; j > 0; j-=30) {
+      this.context.moveTo(0,j);
+      if (y_coordinate>1){
+        // this.context.lineTo(this.canvas.offsetWidth, j);
+        this.context.lineTo(16, j);
+        this.context.stroke()
+        this.context.fillText(y_coordinate-1, 16+2, j+6);
+        this.context.moveTo(32,j);
+        this.context.lineTo(this.canvas.offsetWidth, j);
+        this.context.stroke()
+      }
+      this.context.lineTo(this.canvas.offsetWidth, j);
       this.context.stroke()
+      y_coordinate += 1;
     }
+
     this.context.beginPath();
     this.context.strokeStyle="#000000";
     this.context.beginPath();
@@ -179,12 +229,12 @@ export class AppComponent {
     this.canvas.addEventListener('mousedown', (e) => {
       this.startPaint(e);
     });
-    this.canvas.addEventListener('mouseup', (e) => {
-      this.stopPaint(e);
-    });
-    this.canvas.addEventListener('mousemove', (e) => {
-      this.paint(e);
-    })
+    // this.canvas.addEventListener('mouseup', (e) => {
+    //   this.stopPaint(e);
+    // });
+    // this.canvas.addEventListener('mousemove', (e) => {
+    //   this.paint(e);
+    // })
     this.paintGrid();
   }
 
