@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import {TooltipPosition} from '@angular/material/tooltip';
 import {FormControl} from '@angular/forms';
+import {MyserviceService} from '../app/myservice.service';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,9 @@ export class AppComponent {
   startX = 0
   startY = 0
   trainingSet: [1,2];
-  
+
+
+  constructor(private myservice: MyserviceService){}
 
 
   ngOnInit(){
@@ -38,6 +41,9 @@ export class AppComponent {
     canvas.height = graph_container.offsetHeight;
     this.canvasWidth = canvas.width
     this.canvasHeight = canvas.height
+
+
+    
   }
 
 
@@ -47,6 +53,15 @@ export class AppComponent {
     var context = canvas.getContext('2d');
     context.clearRect(0,0, canvas.width, canvas.height);
     this.paintGrid();
+    console.log("Calling Service!!!")
+    this.myservice.doThisNow().subscribe(
+      (data: string) => {
+        console.log("Received Callback from Backedn => ", data)
+      },
+      (error: any) => {
+        console.log(error)
+      }
+    )
   }
 
   getRandomInt(max): number{
@@ -149,6 +164,7 @@ export class AppComponent {
   //   this.context.beginPath()
     
   // }
+
 
 
 
