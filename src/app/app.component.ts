@@ -26,7 +26,11 @@ export class AppComponent {
   pivotY = 0
   startX = 0
   startY = 0
-  trainingSet: [1,2];
+  // trainingSet = [];
+  training_X = [];
+  training_Y = [];
+  numberOfEpochs = 100
+  
 
 
   constructor(private myservice: MyserviceService){}
@@ -41,22 +45,22 @@ export class AppComponent {
     canvas.height = graph_container.offsetHeight;
     this.canvasWidth = canvas.width
     this.canvasHeight = canvas.height
-
-
-    
   }
 
 
-  
-  clearGraph(): void{
-    var canvas =  document.querySelector('canvas');
-    var context = canvas.getContext('2d');
-    context.clearRect(0,0, canvas.width, canvas.height);
-    this.paintGrid();
+  runAlgorithm(){
+    console.log("Running Algorithm")
     console.log("Calling Service!!!")
-    this.myservice.doThisNow().subscribe(
+    let trainingSet = [this.training_X, this.training_Y]
+    this.myservice.doThisNow(trainingSet).subscribe(
       (data: string) => {
         console.log("Received Callback from Backedn => ", data)
+        console.log("data['coef'] = ", data['coef'])
+        let slope = data['coef']
+        let intercept = data['intercept']
+        this.plotResults(slope, intercept);
+
+        
       },
       (error: any) => {
         console.log(error)
@@ -64,10 +68,64 @@ export class AppComponent {
     )
   }
 
+  plotResults(slope, intercept): void{
+    // I need a line that spans entire width of canvas
+    let initialCanvasX = 0                  // Fixed and True
+    let finalCanvasX = this.canvasWidth     // Fixed and True
+
+
+    // Convert canvas coordinates to cartesian x
+    let initialCartX = (initialCanvasX-30)/30
+    let finalCartX = (finalCanvasX-30)/30
+
+
+    // For each cartesian x find cartesian y from line
+    let initialCartY = slope*initialCartX + intercept
+    let finalCartY = slope*finalCartX + intercept
+
+
+    // Convert cartesian y to canvas y
+    let initialCanvasY = (-30*initialCartY)+this.canvasHeight-30
+    let finalCanvasY = (-30*finalCartY)+this.canvasHeight-30
+
+
+    // Plot Line from canvas x to canvas y
+
+
+    
+    this.context.moveTo(initialCanvasX,initialCanvasY);
+    this.context.lineTo(finalCanvasX, finalCanvasY);
+    this.context.stroke();
+    this.context.beginPath();
+
+
+  }
+
+  solveForCanvasY(canvasX, slope, intercept): number{
+    return (slope*(30*canvasX+30)+intercept+30-this.canvasHeight)/(-30)
+  }
+
+  
+  clearGraph(): void{
+    var canvas =  document.querySelector('canvas');
+    var context = canvas.getContext('2d');
+    context.clearRect(0,0, canvas.width, canvas.height);
+    this.paintGrid();
+    // this.trainingSet = []
+    // console.log("Training Set Emptied => ", this.trainingSet);
+    this.training_X = []
+    this.training_Y = []
+    console.log("Training Set Cleared!")
+    console.log("Training_X is ",this.training_X, " and training_Y is ", this.training_Y);
+
+    
+  }
+
   getRandomInt(max): number{
     return Math.floor(Math.random() * Math.floor(max));
   }
 
+  
   startPaint(e): void{
       // Getting the canvas coordinates
       var pos = this.getMousePos(this.canvas, e);
@@ -80,7 +138,11 @@ export class AppComponent {
       this.context.fill();
       this.context.beginPath();
       console.log("(x,y) = ", "(",X,",",Y,")");
-      console.log("Training Set is ",this.trainingSet);
+      // let a = [X,Y];
+      // this.trainingSet.push(a)
+      this.training_X.push(X)
+      this.training_Y.push(Y)
+      console.log("Training_X is ",this.training_X, " and training_Y is ", this.training_Y);
 
 
       

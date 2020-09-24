@@ -12,12 +12,16 @@ export class MyserviceService {
 
   constructor(private httpClient: HttpClient) { }
 
-  doThisNow(): Observable<any> {
+  doThisNow(trainingSet): Observable<any> {
+    let trainingX = trainingSet[0]
+    let trainingY = trainingSet[1]
+    var op_num = {'trainingX': trainingX, 'trainingY': trainingY};
+
     
-    let post_link = window.location.href.concat('printMyStuff');
+    let post_link = window.location.href.concat('runRegression');
     console.log("This is the address :", post_link)
-    var op_num = {'name': 'Kashish', 'probability1': '0.0', 'probability2':'0.1', 'state': '0.2'};
-    console.log("This is op_num :", op_num)
+    
+    // console.log("This is op_num :", op_num)
     return this.httpClient.post(
       post_link, 
       JSON.stringify(op_num),

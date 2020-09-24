@@ -42,7 +42,7 @@
   <header>
     <nav class="in-landing-navbar">
       <div class="in-landing-navbar-container">
-        <div class="landing-inner-content-left"><span><div class="brand">KG</div></span></div>
+        <div class="landing-inner-content-left"><a id="brand_name" href="https://personal-website-286517.wl.r.appspot.com/"><div class="brand">KG</div></a></div>
         <div class="landing-inner-content-center"><span>Regression Analysis · Machine Learning</span></div>
         <div class="landing-inner-content-right">
           <!-- <button class="text-button"><span>CONTACT</span></button> -->
@@ -190,9 +190,23 @@
             </div>
 
           </mat-tab>
-          <mat-tab label="Upload Dataset">
-            <p>
-            </p>
+          <mat-tab label="Parameters">
+            <div class="regression-main">
+              <h1>Parameters</h1>
+              <mat-form-field class="epochTextField">
+                <mat-label>Number of Epochs</mat-label>
+                <input matInput type="text" [(ngModel)]="numberOfEpochs">
+                <button mat-button *ngIf="numberOfEpochs" matSuffix mat-icon-button aria-label="Clear" (click)="numberOfEpochs=''">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-form-field>
+              <button mat-raised-button color="primary" (click)="runAlgorithm()">Run Algorithm</button>
+              
+              
+
+              
+
+            </div>
 
           </mat-tab>
           <mat-tab label="Support">

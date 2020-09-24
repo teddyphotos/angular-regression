@@ -3,6 +3,28 @@ section{
     width: 100%;
 }
 
+#brand_name{
+    text-decoration: none;
+    color: #fff;
+}
+
+.brand:hover{
+    color: #ff9800;
+}
+
+.epochTextField{
+    min-width: 150px;
+    width: 100%;
+}
+
+.regression-main{
+    min-height: 400px;
+    margin-top: 24px;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+
 .in-landing-navbar-container{
     background-color: transparent;
     min-height: 60px;
