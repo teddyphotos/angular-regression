@@ -3,23 +3,26 @@ section{
     width: 100%;
 }
 
+
 #brand_name{
     text-decoration: none;
     color: #fff;
 }
 
+
 .brand:hover{
     color: #ff9800;
 }
+
 
 .epochTextField{
     min-width: 150px;
     width: 100%;
 }
 
+
 .regression-main{
     min-height: 400px;
-    margin-top: 24px;
     margin-left: 12px;
     margin-right: 12px;
 }
@@ -34,8 +37,8 @@ section{
     letter-spacing: normal;
     color: #ffffff;
     -webkit-font-smoothing: antialiased;
-    
 }
+
 
 .line-break{
     width: 100%;
@@ -44,10 +47,22 @@ section{
     opacity: 0.2;
 }
 
+
 .in-landing-navbar{
     padding-left: 3vw;
     padding-right: 3vw;
 }
+
+
+.progressBarContainer{
+    min-height: 8px;
+}
+
+
+mat-progress-bar{
+    display: none;
+}
+
 
 .floating-nav{
     top: -64px;
@@ -55,6 +70,7 @@ section{
     width: 100%;
     transition: top 0.3s;
 }
+
 
 mat-toolbar{
     background-color: #ffffff;
@@ -66,9 +82,11 @@ mat-toolbar{
 
 }
 
+
 .subsection-container{
     padding-left: 3vw;
     padding-right: 3vw;
+
 }
 
 
@@ -105,6 +123,7 @@ mat-toolbar{
     }
 }
 
+
 @media screen and (min-width: 768px) and (max-width:992px){
     .in-landing-navbar-container{
         min-height: 78px;
@@ -130,12 +149,15 @@ mat-toolbar{
     justify-content: flex-start;
 }
 
+
 .landing-inner-content-center{
     flex: 2;
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
+
+
 .landing-inner-content-right{
     flex: 2;
     display: flex;
@@ -143,11 +165,13 @@ mat-toolbar{
     justify-content: flex-end;
 }
 
+
 .floating-navbar-container{
     display: flex;
     width: 100%;
     -webkit-font-smoothing: antialiased;
 }
+
 
 .floating-inner-content-left{
     flex: 1;
@@ -156,12 +180,14 @@ mat-toolbar{
     justify-content: flex-start;
 }
 
+
 .floating-inner-content-center{
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
+
 
 .floating-inner-content-right{
     flex: 3;
@@ -170,25 +196,30 @@ mat-toolbar{
     justify-content: flex-end;
 }
 
+
 @font-face {
     font-family: recursive-medium;
     src: url("../assets/font/Recursive-Medium-CASL=0-CRSV=0-MONO=0-slnt=0.ttf");
 }
+
 
 @font-face {
     font-family: recursive-light;
     src: url("../assets/font/Recursive-Light-CASL=0-CRSV=1-MONO=0-slnt=0.ttf");
 }
 
+
 @font-face {
     font-family: recursive-regular;
     src: url("../assets/font/Recursive-Regular-CASL=0-CRSV=0-MONO=1-slnt=0.ttf");
 }
 
+
 @font-face {
     font-family: recursive-semibold;
     src: url("../assets/font/Recursive-SemiBold-CASL=0-CRSV=0-MONO=0-slnt=0.ttf");
 }
+
 
 @font-face {
     font-family: library3am;
@@ -205,9 +236,11 @@ mat-toolbar{
     transition: 0.3s;
 }
 
+
 .text-button:hover {
     color: #263238;
 }
+
 
 .text-button-2{
     background-color: transparent;
@@ -225,9 +258,11 @@ mat-toolbar{
     padding: 0px;
 }
 
+
 .text-button-2:hover {
     color: #263238;
 }
+
 
 .text-button-floating{
     background-color: transparent;
@@ -238,9 +273,11 @@ mat-toolbar{
     transition: 0.3s;
 }
 
+
 .text-button-floating:hover {
     color: #ff5722;
 }
+
 
 .subsection{
     color: #fff;
@@ -249,6 +286,7 @@ mat-toolbar{
     font-family: recursive-semibold;
     -webkit-font-smoothing: antialiased;
 }
+
 
 .graph-controls{
     width: 100%;
@@ -259,6 +297,7 @@ mat-toolbar{
     
 }
 
+
 .stroke-width-controller{
     
     display: flex;
@@ -267,33 +306,11 @@ mat-toolbar{
 }
 
 
-/* .subsection-inner-left{
-    flex: 1;
-    padding-bottom: 10px;
-}
-
-.subsection-inner-center{
-    flex: 2;
-    font-family: recursive-regular;
-}
-
-
-.subsection-inner-right{
-    flex: 2;
-} */
-
-
 @media screen and (min-width: 992px){
     .subsection{
         display: flex;
     }
 }
-
-/* .work-description{
-    font-size: 14px;
-    padding-bottom: 20px;
-} */
-
 
 
 @media screen and (max-width: 768px){
@@ -304,14 +321,17 @@ mat-toolbar{
     }
 }
 
+
 .horizontal-social-list{
     list-style-type:none;
 }
+
 
 .social-item{
     display: inline;
     padding-left: 24px;
 }
+
 
 @media screen and (max-width: 712px){
     #twitter-social{
@@ -322,17 +342,19 @@ mat-toolbar{
     }
 }
 
+
 .graph-container{
     margin-bottom: 20px;
     margin-right: 20px;
-    min-height: 40vh;
-    
-    
+    min-height: 40vh;    
 }
+
+
 .stats-container{
     padding-top: 20px;
     min-height: 100%;
 }
+
 
 .graph-dimensions{
     min-height: 100%;
@@ -342,10 +364,10 @@ mat-toolbar{
 
 
 canvas{
-    /* border: 1px solid #eeeeee; */
-    /* width: 100%; */
-    background-color: #fff;
+    background-color: #272c34;
 }
+
+
 .subsection-col{
     flex: 1;
     padding-left: 5px;
@@ -353,8 +375,68 @@ canvas{
     height: 100%;
 }
 
+
 .instructions{
     margin-left: 20px;
     margin-top: 20px;
-    
+    -webkit-font-smoothing: antialiased;
+    font-size: 1.1em;
+}
+
+
+.defination{
+    background-color: #272c34;
+    box-shadow: none;
+}
+
+
+.caution{
+    background-color: #ff5722;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+.greeninfo{
+    background-color: #272c34;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+
+
+.space{
+    margin-left: 6px;
+}
+
+
+.bininfo{
+    display: flex;
+    align-items: center;
+}
+
+
+.metrics{
+    box-shadow: none;
+    background-color: #272c34;
+}
+
+
+.slopeResult{
+    flex: 1;
+}
+
+
+.interceptResult{
+    flex: 1;
+}
+
+
+.resultpane{
+    display: flex;
+    margin-top: 4px;
 }

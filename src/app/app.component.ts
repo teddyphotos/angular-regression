@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import {TooltipPosition} from '@angular/material/tooltip';
 import {FormControl} from '@angular/forms';
 import {MyserviceService} from '../app/myservice.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -26,14 +27,14 @@ export class AppComponent {
   pivotY = 0
   startX = 0
   startY = 0
-  // trainingSet = [];
   training_X = [];
   training_Y = [];
-  numberOfEpochs = 100
+  resultSlope = 0.0
+  resultIntercept = 0.0
+  
   
 
-
-  constructor(private myservice: MyserviceService){}
+  constructor(private myservice: MyserviceService, private _snackBar: MatSnackBar){}
 
 
   ngOnInit(){
@@ -49,85 +50,84 @@ export class AppComponent {
 
 
   runAlgorithm(){
-    console.log("Running Algorithm")
-    console.log("Calling Service!!!")
+    document.getElementById("progressBar").style.display="block";
+    if (this.training_X.length == 0){
+      this.openErrorSnackBar("Error: Empty Training Set!")
+      document.getElementById("progressBar").style.display="none";
+      return
+    }
     let trainingSet = [this.training_X, this.training_Y]
+    this.openGreySnackBar("Running Regression...")
     this.myservice.doThisNow(trainingSet).subscribe(
       (data: string) => {
-        console.log("Received Callback from Backedn => ", data)
-        console.log("data['coef'] = ", data['coef'])
-        let slope = data['coef']
-        let intercept = data['intercept']
+        this.openSnackBar("Regression Finished!")
+        let slope = data['coef'];
+        let intercept = data['intercept'];
         this.plotResults(slope, intercept);
-
-        
+        this.resultSlope = data['coef'];
+        this.resultIntercept = data['intercept'];
       },
       (error: any) => {
+        let a = "Error ".concat(error.status).concat(": ").concat(error.name);
+        this.openErrorSnackBar(a)
         console.log(error)
       }
     )
   }
 
+  openSnackBar(message: string) {
+    this._snackBar.open(message, "", {
+      duration: 2000,
+      panelClass: ['green-snackbar']
+    });
+  } 
+
+  openGreySnackBar(message: string) {
+    this._snackBar.open(message, "", {
+      duration: 2000,
+      panelClass: ['grey-snackbar']
+    });
+  } 
+
+
+  openErrorSnackBar(message: string) {
+    this._snackBar.open(message, "", {
+      duration: 2000,
+      panelClass: ['red-snackbar']
+    });
+  }  
+
   plotResults(slope, intercept): void{
-    // I need a line that spans entire width of canvas
-    let initialCanvasX = 0                  // Fixed and True
-    let finalCanvasX = this.canvasWidth     // Fixed and True
-
-
-    // Convert canvas coordinates to cartesian x
+    let initialCanvasX = 0                  
+    let finalCanvasX = this.canvasWidth
     let initialCartX = (initialCanvasX-30)/30
     let finalCartX = (finalCanvasX-30)/30
-
-
-    // For each cartesian x find cartesian y from line
     let initialCartY = slope*initialCartX + intercept
     let finalCartY = slope*finalCartX + intercept
-
-
-    // Convert cartesian y to canvas y
     let initialCanvasY = (-30*initialCartY)+this.canvasHeight-30
     let finalCanvasY = (-30*finalCartY)+this.canvasHeight-30
-
-
-    // Plot Line from canvas x to canvas y
-
-
-    
+    this.context.strokeStyle = "#eeeeee";
     this.context.moveTo(initialCanvasX,initialCanvasY);
     this.context.lineTo(finalCanvasX, finalCanvasY);
     this.context.stroke();
     this.context.beginPath();
-
-
-  }
-
-  solveForCanvasY(canvasX, slope, intercept): number{
-    return (slope*(30*canvasX+30)+intercept+30-this.canvasHeight)/(-30)
+    document.getElementById("progressBar").style.display="none";
   }
 
   
   clearGraph(): void{
+    document.getElementById("progressBar").style.display="block";
     var canvas =  document.querySelector('canvas');
     var context = canvas.getContext('2d');
     context.clearRect(0,0, canvas.width, canvas.height);
     this.paintGrid();
-    // this.trainingSet = []
-    // console.log("Training Set Emptied => ", this.trainingSet);
     this.training_X = []
     this.training_Y = []
-    console.log("Training Set Cleared!")
-    console.log("Training_X is ",this.training_X, " and training_Y is ", this.training_Y);
-
-    
+    document.getElementById("progressBar").style.display="none";
   }
 
-  getRandomInt(max): number{
-    return Math.floor(Math.random() * Math.floor(max));
-  }
 
-  
   startPaint(e): void{
-      // Getting the canvas coordinates
       var pos = this.getMousePos(this.canvas, e);
       var x = pos.x;
       var y = pos.y;
@@ -137,100 +137,9 @@ export class AppComponent {
       this.context.stroke();
       this.context.fill();
       this.context.beginPath();
-      console.log("(x,y) = ", "(",X,",",Y,")");
-      // let a = [X,Y];
-      // this.trainingSet.push(a)
       this.training_X.push(X)
       this.training_Y.push(Y)
-      console.log("Training_X is ",this.training_X, " and training_Y is ", this.training_Y);
-
-
-      
   }
-  
-  // OLD START PAINT FUNCTION TO PAINT ON CANVAS -x-x-x-x--x-x-x-xx--x-x-x
-  // startPaint(e): void{
-  //     this.shouldPaint = true;
-  //     this.paint(e);
-  // }
-
-  // OLD STOP PAINT FUNCTION
-  // stopPaint(): void{
-  //     this.shouldPaint = false;
-  //     this.context.beginPath()
-  // }
-
-  // OLD PAINT FUNCTION USED TO PAINT ON THE CANVAS
-  // paint(e): void{
-  //   if (!this.shouldPaint){
-  //     return;
-  //   }
-  //   var pos = this.getMousePos(this.canvas, e);
-  //   this.context.lineWidth = this.myModel;
-  //   this.context.lineCap = 'round';
-  //   this.context.lineTo(pos.x, pos.y);
-  //   this.context.stroke()
-  //   this.context.beginPath();
-  //   this.context.moveTo(pos.x, pos.y);
-  // }
-
-
-
-  // NEW START PAINT FUNCTION TO MOVE GRID -------------------------------
-  // startPaint(e): void{
-  //   this.shouldPaint = true;
-  //   this.context.strokeStyle="#eeeeee";
-  //   this.context.lineWidth = 1;
-  //   var pos = this.getMousePos(this.canvas, e);
-  //   this.pivotX = pos.x;
-  //   this.pivotY = pos.y;
-  // }
-
-
-  // stopPaint(e): void{
-  //   this.shouldPaint = false; 
-  //   var pos = this.getMousePos(this.canvas, e);
-  //   let diffX = pos.x - this.pivotX;
-  //   let diffY = pos.y - this.pivotY; 
-  //   this.startX = this.startX + diffX;
-  //   this.startY = this.startY + diffY;
-  // }
-
-
-  // This Paint method redraws the entire grid everytime the user moves the mouse
-  // To user it appears as if he is moving the grid
-  // paint(e): void{
-  //   if (!this.shouldPaint){
-  //     return;
-  //   }
-  //   this.context.clearRect(0,0, this.canvas.width, this.canvas.height);
-
-  //   var pos = this.getMousePos(this.canvas, e);
-  //   let diffX = pos.x - this.pivotX;
-  //   let diffY = pos.y - this.pivotY;
-
-  //   this.context.strokeStyle="#eeeeee";
-  //   this.context.lineWidth = 1;
-    
-  //   for (let i = (this.startX+(diffX%30))%30; i < this.canvas.offsetWidth; i+=30) { 
-  //     this.context.moveTo(i,0);
-  //     this.context.lineTo(i, this.canvas.offsetHeight);
-  //     this.context.stroke()
-  //   }
-  //   for (let i = (this.startY+(diffY%30))%30; i < this.canvas.offsetHeight; i+=30) {
-  //     this.context.moveTo(0,i);
-  //     this.context.lineTo(this.canvas.offsetWidth, i);
-  //     this.context.stroke()
-  //   }
-
-  //   this.context.beginPath()
-    
-  // }
-
-
-
-
-
   
   
   getMousePos(canvas, evt) {
@@ -241,20 +150,16 @@ export class AppComponent {
     };
   }
 
-  
-
 
   paintGrid(): void{
-    this.context.strokeStyle="#eeeeee";
+    this.context.strokeStyle="#37474f";
+    this.context.fillStyle = "#eeeeee";
     this.context.lineWidth = 1;
     this.context.font = "16px Arial";
-    
-    // This generates Verticle lines with coordinates
     var x_coordinate = 0
     for (let i = 0; i < this.canvas.offsetWidth; i+=30) { 
       this.context.moveTo(i,0);
       if (i != 0){
-        // This generates number line on bottom of screen
         this.context.lineTo(i, this.canvas.offsetHeight-32);
         this.context.stroke();
         if (x_coordinate>9){
@@ -271,20 +176,16 @@ export class AppComponent {
         this.context.lineTo(i, this.canvas.offsetHeight);
         this.context.stroke()
       }else{
-        // i is 0
         this.context.lineTo(i, this.canvas.offsetHeight);
         this.context.stroke()
         x_coordinate -= 1
       }
       x_coordinate += 1;
     }
-    
-    // This generates Horizontal lines with coordinates
     var y_coordinate = 0;
     for (let j = this.canvas.offsetHeight; j > 0; j-=30) {
       this.context.moveTo(0,j);
       if (y_coordinate>1){
-        // this.context.lineTo(this.canvas.offsetWidth, j);
         this.context.lineTo(16, j);
         this.context.stroke()
         this.context.fillText(y_coordinate-1, 16+2, j+6);
@@ -296,7 +197,6 @@ export class AppComponent {
       this.context.stroke()
       y_coordinate += 1;
     }
-
     this.context.beginPath();
     this.context.strokeStyle="#000000";
     this.context.beginPath();
@@ -307,12 +207,6 @@ export class AppComponent {
     this.canvas.addEventListener('mousedown', (e) => {
       this.startPaint(e);
     });
-    // this.canvas.addEventListener('mouseup', (e) => {
-    //   this.stopPaint(e);
-    // });
-    // this.canvas.addEventListener('mousemove', (e) => {
-    //   this.paint(e);
-    // })
     this.paintGrid();
   }
 
