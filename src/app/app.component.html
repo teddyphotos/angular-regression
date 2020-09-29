@@ -76,15 +76,19 @@
   <div class="subsection-container" id="subsection-container">
     <div class="subsection">
       <div class="subsection-col">
-        <div class="graph-container" id="graph-container">
-          <mat-card>
-            <canvas>Your browser does not support HTML5 Canvas! Please update to newer version to preview this.</canvas>
-          </mat-card>
+        <div class="graph-controls-container">
+
           <div class="graph-controls">
             <div class="graph-dimensions">
               <mat-chip-list>
-                <mat-chip>W: {{canvasWidth}}</mat-chip>
-                <mat-chip>H: {{canvasHeight}}</mat-chip>
+                <mat-chip color="accent" selected>
+                  Width: {{canvasWidth}}px
+                  
+                </mat-chip>
+                <mat-chip color="accent" selected>
+                 
+                  Height: {{canvasHeight}}px
+                </mat-chip>
               </mat-chip-list>
               </div>
             <div class="stroke-width-controller">
@@ -92,15 +96,39 @@
               <mat-slider [(ngModel)]="myModel" thumbLabel min="1" max="10" step="1" value="5" #tooltip="matTooltip" matTooltip="Stroke Width" [matTooltipPosition]="positionBottom.value" [matTooltipShowDelay]='500'></mat-slider>
               <div>{{myModel}}</div>
             </div>    
-            <button mat-mini-fab color="primary" aria-label="Example icon button with a delete icon" (click)="clearGraph()" #tooltip="matTooltip" matTooltip="Clear" [matTooltipPosition]="positionLeft.value" [matTooltipShowDelay]='500'>
+            <button mat-icon-button color="accent" aria-label="Example icon button with a delete icon" (click)="clearGraph()" #tooltip="matTooltip" matTooltip="Clear Graph" [matTooltipPosition]="positionBottom.value" [matTooltipShowDelay]='500'>
               <mat-icon>delete</mat-icon>
             </button>
+          </div>
 
-          </div>       
         </div>
-        <mat-divider></mat-divider>
+
+         
+        
+        <div class="graph-container" id="graph-container">
+          <mat-card class="graph-container-card">
+            <canvas>Your browser does not support HTML5 Canvas! Please update to newer version to preview this.</canvas>
+          </mat-card>
+        </div>
         <div class="stats-container">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci dolore eveniet quod? Ut eveniet, sunt odio tempora explicabo debitis aut laudantium aperiam fugit. Fugiat perferendis fugit dolorum labore quas quis tempore laborum facilis cupiditate! Vel dignissimos, repellat officiis asperiores voluptates quia iusto dolores sed, vero harum ab veritatis, ratione maxime?
+          <mat-card class="datametrics">
+            <div class="bininfo">
+              <mat-icon>legend_toggle</mat-icon><div class="space"></div>Statistical Metrics
+            </div>
+            <div class="resultInfo">
+              When your model has been trained we use the equation of the best fit line to calculate some other statistical indicators for your training dataset that tells you how good the line represents or fits your dataset.
+            </div>
+            <div class="resultpane">
+                  <div class="slopeResult">
+                    <!-- Slope: {{resultSlope}} -->
+                    <button mat-stroked-button color="accent" class="example-full-width">Standard Deviation: {{standardDeviation}}</button>
+                  </div>
+                  <div class="interceptResult">
+                    <!-- Intercept: {{resultIntercept}} -->
+                    <button mat-stroked-button color="accent" class="example-full-width">Variance: {{variance}}</button>
+                  </div>
+                </div>
+          </mat-card>
         </div>
       </div>
 
@@ -139,7 +167,7 @@
               <mat-card class="greeninfo">
                 <mat-icon>code</mat-icon>
                 <div class="space"></div>
-                Click the Run Regression button in Parameters tab to see the results
+                Click the Train Model button in Parameters tab to see the results
               </mat-card>
             </div>
           </mat-tab>
@@ -153,7 +181,43 @@
               <br>
               <mat-card class="metrics">
                 <div class="bininfo">
-                  <mat-icon>equalizer</mat-icon><div class="space"></div>Metrics
+                  <mat-icon>insights</mat-icon><div class="space"></div>Train and Predict
+                </div>
+                <div class="resultInfo">
+                  When you have trained the model, you can use it to make predictions on the data that your model has not seen before. To make a predictions, type the value of independent variable and the value of dependent variable will be displayed below
+                </div>
+                <div class="resultpane2">
+                  <div class="horizontalStack">
+
+                    <div class="independentVariable">
+                      <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Independent Variable</mat-label>
+                        <input matInput class="predict_input" placeholder="" value="" [(ngModel)]="independentX">
+                      </mat-form-field>
+                    </div>
+                    <div class="dependentVariable">
+                      <!-- <button mat-stroked-button color="accent" class="example-full-width">Predicted Value: {{resultSlope*independentX + resultIntercept}}</button> -->
+                      <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Predicted Value</mat-label>
+                        <input matInput placeholder="" value="{{resultSlope*independentX + resultIntercept}}" disabled>
+                      </mat-form-field>
+                    </div>
+
+
+                  </div>
+                  
+                  
+                  <button class="trainingButton" mat-raised-button color="primary" (click)="runAlgorithm()">
+                    <mat-icon>code</mat-icon>
+                    Train Model
+                  </button>
+                </div>
+              </mat-card>
+
+              <br>
+              <mat-card class="metrics">
+                <div class="bininfo">
+                  <mat-icon>equalizer</mat-icon><div class="space"></div>Regression Metrics
                 </div>
                 <div class="resultInfo">
                   When you train your model, the training algorithm will output the slope and intercept of the best fit line and display them here
@@ -162,43 +226,14 @@
                   <div class="slopeResult">
                     <!-- Slope: {{resultSlope}} -->
                     <button mat-stroked-button color="accent" class="example-full-width">Slope: {{resultSlope}}</button>
-
                   </div>
                   <div class="interceptResult">
                     <!-- Intercept: {{resultIntercept}} -->
                     <button mat-stroked-button color="accent" class="example-full-width">Intercept: {{resultIntercept}}</button>
                   </div>
                 </div>
-                
               </mat-card>
-              <br>
-
-              <mat-card class="metrics">
-                <div class="bininfo">
-                  <mat-icon>insights</mat-icon><div class="space"></div>Prediction
-                </div>
-                <div class="resultInfo">
-                  When you have trained the model, you can use it to make predictions on the data that your model has not seen before. To make a predictions, type the value of independent variable and the value of dependent variable will be displayed below
-                </div>
-                <div class="resultpane2">
-                  <div class="independentVariable">
-                    <mat-form-field class="example-full-width">
-                      <mat-label>Independent Variable</mat-label>
-                      <input matInput placeholder="" value="0" [(ngModel)]="independentX">
-                    </mat-form-field>
-                  </div>
-                  <div class="dependentVariable">
-                    <button mat-stroked-button color="accent" class="example-full-width">Predicted Value: {{resultSlope*independentX + resultIntercept}}</button>
-                  </div>
-                </div>
-                
-              </mat-card>
-              <br>
-
-              <button mat-raised-button color="primary" (click)="runAlgorithm()">
-                <mat-icon>code</mat-icon>
-                Run Regression
-              </button>
+              
 
             </div>
           </mat-tab>

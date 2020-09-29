@@ -32,6 +32,8 @@ export class AppComponent {
   resultSlope = 0
   resultIntercept = 0
   independentX = 0
+  standardDeviation = 1095
+  variance = 2041
 
   
   
@@ -178,8 +180,8 @@ export class AppComponent {
         this.context.lineTo(i, this.canvas.offsetHeight);
         this.context.stroke()
       }else{
-        this.context.lineTo(i, this.canvas.offsetHeight);
-        this.context.stroke()
+        // this.context.lineTo(i, this.canvas.offsetHeight);
+        // this.context.stroke()
         x_coordinate -= 1
       }
       x_coordinate += 1;
@@ -195,8 +197,13 @@ export class AppComponent {
         this.context.lineTo(this.canvas.offsetWidth, j);
         this.context.stroke()
       }
-      this.context.lineTo(this.canvas.offsetWidth, j);
-      this.context.stroke()
+      if (j == this.canvas.offsetHeight){
+
+      }else{
+        this.context.lineTo(this.canvas.offsetWidth, j);
+        this.context.stroke()
+      }
+      
       y_coordinate += 1;
     }
     this.context.beginPath();

@@ -27,7 +27,7 @@ section{
     -webkit-font-smoothing: antialiased;
     font-size: 1.1em;
     height: 100%;
-    min-height: 75vh;
+    min-height: 100vh;
     overflow-y: scroll;
     padding-right: 20px;
     padding-bottom: 20px;
@@ -312,6 +312,12 @@ mat-toolbar{
     
 }
 
+.graph-controls-container{
+    margin-right: 20px;
+    /* padding-left: 20px; */
+    padding-right: 20px;
+}
+
 
 .stroke-width-controller{
     
@@ -361,13 +367,20 @@ mat-toolbar{
 .graph-container{
     margin-bottom: 20px;
     margin-right: 20px;
-    min-height: 40vh;    
+    min-height: 40vh;   
+    margin-top: 12px; 
 }
 
 
+.graph-container-card{
+    background-color: #252525;
+    /* box-shadow: none; */
+}
+
 .stats-container{
-    padding-top: 20px;
     min-height: 100%;
+    /* padding-left: 10px; */
+    padding-right: 20px;
 }
 
 
@@ -469,11 +482,13 @@ canvas{
 .independentVariable{
     flex: 1;
     margin-right: 5px;
+    
 }
 
 .dependentVariable{
     flex: 1;
     margin-left: 5px;
+    
 }
 
 .example-full-width {
@@ -482,8 +497,12 @@ canvas{
 
 .resultpane2{
     margin-top: 16px;
+    
 }
 
+.horizontalStack{
+    display: flex;
+}
 
 .support-main{
     margin-left: 20px;
@@ -494,4 +513,17 @@ canvas{
     height: 100%;
     overflow-y: scroll;
     padding-right: 20px;
+}
+
+.trainingButton{
+    width: 100%;
+}
+
+.datametrics{
+    box-shadow: none;
+    background-color: #272c34;
+}
+
+.mat-input-wrapper {
+    background: gray;
 }
