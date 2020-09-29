@@ -29,8 +29,10 @@ export class AppComponent {
   startY = 0
   training_X = [];
   training_Y = [];
-  resultSlope = 0.0
-  resultIntercept = 0.0
+  resultSlope = 0
+  resultIntercept = 0
+  independentX = 0
+
   
   
 

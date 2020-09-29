@@ -6,7 +6,7 @@
   <header>
     <nav class="in-landing-navbar">
       <div class="in-landing-navbar-container">
-        <div class="landing-inner-content-left"><a id="brand_name" href="https://personal-website-286517.wl.r.appspot.com/"><div class="brand">KG</div></a></div>
+        <div class="landing-inner-content-left"><a id="brand_name" href="/"><div class="brand">KG</div></a></div>
         <div class="landing-inner-content-center"><span>Regression Analysis · Machine Learning</span></div>
         <div class="landing-inner-content-right">
           <ul class="horizontal-social-list">
@@ -103,9 +103,15 @@
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci dolore eveniet quod? Ut eveniet, sunt odio tempora explicabo debitis aut laudantium aperiam fugit. Fugiat perferendis fugit dolorum labore quas quis tempore laborum facilis cupiditate! Vel dignissimos, repellat officiis asperiores voluptates quia iusto dolores sed, vero harum ab veritatis, ratione maxime?
         </div>
       </div>
+
+
       <mat-divider [vertical]="true"></mat-divider>
+
+      <!-- Right Column -->
       <div class="subsection-col">
         <mat-tab-group mat-align-tabs="center">
+
+          <!-- Instructions Tab -->
           <mat-tab label="Instructions">
            <div class="instructions">
             <mat-card class="defination">
@@ -133,24 +139,62 @@
               <mat-card class="greeninfo">
                 <mat-icon>code</mat-icon>
                 <div class="space"></div>
-                Ready? Click the Run Regression button in Parameters tab to see the results
+                Click the Run Regression button in Parameters tab to see the results
               </mat-card>
             </div>
           </mat-tab>
+
+
+          <!-- Parameters Tab -->
           <mat-tab label="Parameters">
+
+
             <div class="regression-main">
               <br>
               <mat-card class="metrics">
                 <div class="bininfo">
                   <mat-icon>equalizer</mat-icon><div class="space"></div>Metrics
                 </div>
+                <div class="resultInfo">
+                  When you train your model, the training algorithm will output the slope and intercept of the best fit line and display them here
+                </div>
                 <div class="resultpane">
-                  <div class="slopeResult">Slope: {{resultSlope}}</div>
-                  <div class="interceptResult">Intercept: {{resultIntercept}}</div>
+                  <div class="slopeResult">
+                    <!-- Slope: {{resultSlope}} -->
+                    <button mat-stroked-button color="accent" class="example-full-width">Slope: {{resultSlope}}</button>
+
+                  </div>
+                  <div class="interceptResult">
+                    <!-- Intercept: {{resultIntercept}} -->
+                    <button mat-stroked-button color="accent" class="example-full-width">Intercept: {{resultIntercept}}</button>
+                  </div>
                 </div>
                 
               </mat-card>
               <br>
+
+              <mat-card class="metrics">
+                <div class="bininfo">
+                  <mat-icon>insights</mat-icon><div class="space"></div>Prediction
+                </div>
+                <div class="resultInfo">
+                  When you have trained the model, you can use it to make predictions on the data that your model has not seen before. To make a predictions, type the value of independent variable and the value of dependent variable will be displayed below
+                </div>
+                <div class="resultpane2">
+                  <div class="independentVariable">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Independent Variable</mat-label>
+                      <input matInput placeholder="" value="0" [(ngModel)]="independentX">
+                    </mat-form-field>
+                  </div>
+                  <div class="dependentVariable">
+                    <button mat-stroked-button color="accent" class="example-full-width">Predicted Value: {{resultSlope*independentX + resultIntercept}}</button>
+                  </div>
+                </div>
+                
+              </mat-card>
+              <br>
+
               <button mat-raised-button color="primary" (click)="runAlgorithm()">
                 <mat-icon>code</mat-icon>
                 Run Regression
@@ -158,9 +202,18 @@
 
             </div>
           </mat-tab>
+
+
+          <!-- Support Tab -->
           <mat-tab label="Support">
-            Content 3
+            <div class="support-main">
+
+            </div>
           </mat-tab>
+
+
+
+
         </mat-tab-group>
       </div>
     </div>

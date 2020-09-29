@@ -22,10 +22,18 @@ section{
 
 
 .regression-main{
-    min-height: 400px;
     margin-left: 12px;
     margin-right: 12px;
+    -webkit-font-smoothing: antialiased;
+    font-size: 1.1em;
+    height: 100%;
+    min-height: 75vh;
+    overflow-y: scroll;
+    padding-right: 20px;
+    padding-bottom: 20px;
 }
+
+
 
 
 .in-landing-navbar-container{
@@ -86,6 +94,8 @@ mat-toolbar{
 .subsection-container{
     padding-left: 3vw;
     padding-right: 3vw;
+    padding-bottom: 0px;
+    min-height: 100vh;
 
 }
 
@@ -282,9 +292,14 @@ mat-toolbar{
 .subsection{
     color: #fff;
     padding-top: 20px;
-    padding-bottom: 20px;
+    /* padding-bottom: 20px; */
     font-family: recursive-semibold;
     -webkit-font-smoothing: antialiased;
+    min-height: 82vh;
+}
+
+.mat-tab-group{
+    min-height: 100%;
 }
 
 
@@ -372,15 +387,19 @@ canvas{
     flex: 1;
     padding-left: 5px;
     padding-right: 5px;
-    height: 100%;
+    min-height: 100%;
 }
 
 
 .instructions{
     margin-left: 20px;
     margin-top: 20px;
-    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;    
+    min-height: 75vh;
     font-size: 1.1em;
+    height: 100%;
+    overflow-y: scroll;
+    padding-right: 20px;
 }
 
 
@@ -428,15 +447,51 @@ canvas{
 
 .slopeResult{
     flex: 1;
+    margin-right: 8px;
 }
 
 
 .interceptResult{
     flex: 1;
+    margin-left: 8px;
 }
 
 
 .resultpane{
     display: flex;
+    margin-top: 12px;
+}
+
+.resultInfo{
     margin-top: 4px;
+}
+
+.independentVariable{
+    flex: 1;
+    margin-right: 5px;
+}
+
+.dependentVariable{
+    flex: 1;
+    margin-left: 5px;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+.resultpane2{
+    margin-top: 16px;
+}
+
+
+.support-main{
+    margin-left: 20px;
+    margin-top: 20px;
+    -webkit-font-smoothing: antialiased;    
+    min-height: 75vh;
+    font-size: 1.1em;
+    height: 100%;
+    overflow-y: scroll;
+    padding-right: 20px;
 }
