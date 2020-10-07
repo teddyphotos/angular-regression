@@ -32,8 +32,8 @@ export class AppComponent {
   resultSlope = 0
   resultIntercept = 0
   independentX = 0
-  standardDeviation = 1095
-  variance = 2041
+  standardDeviation = 0
+  variance = 0
 
   
   
@@ -70,6 +70,8 @@ export class AppComponent {
         this.plotResults(slope, intercept);
         this.resultSlope = data['coef'];
         this.resultIntercept = data['intercept'];
+        this.variance = data['variance'];
+        this.standardDeviation = data['standardDeviation'];
       },
       (error: any) => {
         let a = "Error ".concat(error.status).concat(": ").concat(error.name);
@@ -92,6 +94,10 @@ export class AppComponent {
       panelClass: ['grey-snackbar']
     });
   } 
+
+  sendMessage() {
+    alert("Message")
+  }
 
 
   openErrorSnackBar(message: string) {

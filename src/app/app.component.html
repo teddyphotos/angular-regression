@@ -116,7 +116,7 @@
               <mat-icon>legend_toggle</mat-icon><div class="space"></div>Statistical Metrics
             </div>
             <div class="resultInfo">
-              When your model has been trained we use the equation of the best fit line to calculate some other statistical indicators for your training dataset that tells you how good the line represents or fits your dataset.
+              When your model has been trained we use the equation of the best fit line to calculate some other statistical indicators for your training data set that tells you how good the line represents or fits your data set.
             </div>
             <div class="resultpane">
                   <div class="slopeResult">
@@ -125,7 +125,7 @@
                   </div>
                   <div class="interceptResult">
                     <!-- Intercept: {{resultIntercept}} -->
-                    <button mat-stroked-button color="accent" class="example-full-width">Variance: {{variance}}</button>
+                    <button matTooltip="Root Mean Square Deviation" [matTooltipShowDelay]='1000' mat-stroked-button color="accent" class="example-full-width">RMSD: {{variance}}</button>
                   </div>
                 </div>
           </mat-card>
@@ -148,7 +148,7 @@
               In other words, given a number of \( (x,y) \) pairs, we can use regression to find the equation of a line $$y = mx + c $$ that best describes the \( (x,y) \) data by minimizing the sum of squared differences between the predicted target variable \(\tilde y\) and the actual target variable \(y\)
             </mat-card>       
               <br>
-              Use the graph on the left to mark points \((x^i, y^i) \) by clicking at their respective co-ordinate. These points constitute your training dataset. 
+              Use the graph on the left to mark points \((x^i, y^i) \) by clicking at their respective co-ordinate. These points constitute your training data set. 
               <br><br>
               <div class="bininfo">
                 <mat-icon>brush</mat-icon><div class="space"></div>Adjust the slider to increase or decrease the size of your points.
@@ -162,7 +162,7 @@
               <mat-card class="caution">
                 <mat-icon>error</mat-icon>
                 <div class="space"></div>
-                Clearing the graph will also delete your entire training dataset
+                Clearing the graph will also delete your entire training data set
               </mat-card>
               <mat-card class="greeninfo">
                 <mat-icon>code</mat-icon>
@@ -242,6 +242,66 @@
           <!-- Support Tab -->
           <mat-tab label="Support">
             <div class="support-main">
+       
+              <mat-card class="support-highlight-card">
+                
+                
+                
+                <div class="support-message-greeting">
+
+                  <span class="lineH">
+                    Hello 👋
+         
+                  </span>
+                  <br>
+                  <div class="thanks">
+                    <div class="thanks-message">Thank you so much for using this app</div>
+                    <div class="thanks-heart">
+                      <svg viewBox="0 -28 512.00001 512" xmlns="http://www.w3.org/2000/svg" height="16" width="16"><path d="m512 153.867188c0 43.292968-16.132812 82.941406-50.773438 124.734374-30.996093 37.398438-75.53125 75.355469-127.113281 119.308594-17.625 15.015625-37.597656 32.039063-58.320312 50.171875-5.429688 4.75-12.386719 7.386719-19.613281 7.429688h-.179688c-7.289062 0-14.316406-2.640625-19.792969-7.4375-20.683593-18.085938-40.625-35.089844-58.21875-50.085938l-.089843-.066406c-51.574219-43.957031-96.128907-81.921875-127.117188-119.320313-34.648438-41.792968-50.78125-81.441406-50.78125-124.734374 0-42.066407 14.425781-80.882813 40.617188-109.292969 26.507812-28.75 62.875-44.574219 102.414062-44.574219 29.558594 0 56.617188 9.335938 80.449219 27.761719 12.027343 9.304687 22.921875 20.679687 32.519531 33.964843l.179688-.238281c9.558593-13.183593 20.394531-24.480469 32.347656-33.726562 23.824218-18.425781 50.894531-27.761719 80.441406-27.761719 39.546875 0 75.914062 15.824219 102.414062 44.574219 26.191407 28.410156 40.617188 67.214843 40.617188 109.292969zm0 0" fill="#ff5e95"/><path d="m512 153.867188c0 43.292968-16.132812 82.941406-50.773438 124.734374-30.996093 37.398438-75.53125 75.355469-127.113281 119.308594-17.625 15.015625-37.597656 32.039063-58.320312 50.171875-5.429688 4.75-12.386719 7.386719-19.613281 7.429688v-394.023438c9.558593-13.183593 20.394531-24.480469 32.347656-33.726562 23.824218-18.425781 50.894531-27.761719 80.441406-27.761719 39.546875 0 75.914062 15.824219 102.414062 44.574219 26.191407 28.410156 40.617188 67.214843 40.617188 109.292969zm0 0" fill="#ff3980"/></svg>
+                    </div>
+                    
+                  </div>
+                
+                </div>
+
+
+
+                <div class="support-message-main">
+                  We hope you liked it and were able to create your own data set and had fun playing with regression. If you encountered any issues or just want to say hello, feel free to write to us:
+                  <br><br>
+                  
+                  
+                  
+                  
+                  <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>Tell us what you think</mat-label>
+                    <textarea matInput placeholder="Write your message.." value=""></textarea>
+                  </mat-form-field>
+                  <button class="trainingButton" mat-raised-button color="primary" (click)="sendMessage()">
+                    Send Message
+                  </button>
+                </div>
+              
+              </mat-card>
+              <div class="other-info">
+                You can also use LinkedIn or Twitter to send us message or <br>join the conversation on Slack
+                <br>
+                <div class="slack-holder">
+                  <a href="https://mlwebprojects.slack.com" style="text-decoration: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="153" height="32" viewBox="0 0 512 106">
+                      <g id="Group_1" data-name="Group 1" transform="translate(-698 -1543)">
+                        <rect id="Rectangle_1" data-name="Rectangle 1" width="512" height="106" rx="28" transform="translate(698 1543)" fill="#df4763"/>
+                        <text id="Join_us_on_Slack_" data-name="Join us on Slack!" transform="translate(803 1612)" fill="#fff" font-size="45" font-family="Arial-BoldMT, Arial" font-weight="700"><tspan x="0" y="0">Join us on Slack!</tspan></text>
+                        <rect id="Rectangle_2" data-name="Rectangle 2" width="62" height="62" rx="20" transform="translate(713.291 1576.418) rotate(-17)" fill="#fff"/>
+                        <path id="Path_18" data-name="Path 18" d="M8.183,29.473a3.838,3.838,0,0,0,3.438,2.518c.7.1,1.229-.163,5.9-1.719l3.1,9.21-4.644,1.544a3.731,3.731,0,0,0-2.352,4.7,3.838,3.838,0,0,0,3.438,2.518c.7.1,1.229-.163,5.9-1.719l1.607,4.81a3.8,3.8,0,0,0,4.707,2.343,3.72,3.72,0,0,0,2.352-4.7l-1.607-4.81,9.577-3.2,1.607,4.81a3.8,3.8,0,0,0,4.707,2.343,3.72,3.72,0,0,0,2.352-4.7l-1.607-4.81,4.644-1.544a3.687,3.687,0,0,0,2.343-4.675l0,0a3.725,3.725,0,0,0-4.707-2.343L44.3,31.59l-3.1-9.21,4.644-1.544a3.712,3.712,0,1,0-2.355-7.041l-4.644,1.544-1.607-4.81a3.721,3.721,0,0,0-7.059,2.355l1.607,4.81-9.557,3.191-1.607-4.81a3.721,3.721,0,0,0-7.059,2.355l1.607,4.81-4.635,1.535a3.721,3.721,0,0,0-2.352,4.7Zm25.931-4.687,3.1,9.23-9.568,3.2-3.1-9.23Z" transform="translate(721.273 1565.981)" fill="#e91e63"/>
+                      </g>
+                    </svg>
+                  </a>
+                  
+
+                </div>
+
+              </div>
 
             </div>
           </mat-tab>
