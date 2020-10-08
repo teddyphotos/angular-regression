@@ -15,17 +15,7 @@ section{
 }
 
 
-.regression-main{
-    margin-left: 12px;
-    margin-right: 12px;
-    -webkit-font-smoothing: antialiased;
-    font-size: 1.1em;
-    height: 100%;
-    min-height: 100vh;
-    overflow-y: scroll;
-    padding-right: 20px;
-    padding-bottom: 20px;
-}
+
 
 
 
@@ -260,10 +250,8 @@ mat-progress-bar{
 
 
 .stroke-width-controller{
-    
     display: flex;
     align-items: center;
-    
 }
 
 
@@ -307,8 +295,8 @@ mat-progress-bar{
 .graph-container{
     margin-bottom: 20px;
     margin-right: 20px;
-    min-height: 40vh;   
-    margin-top: 12px; 
+    min-height: 50vh;   
+    /* margin-top: 12px;  */
 }
 
 
@@ -317,9 +305,8 @@ mat-progress-bar{
  
 }
 
-.stats-container{
+.graph-bottom-container{
     min-height: 100%;
-    
     padding-right: 20px;
 }
 
@@ -344,16 +331,7 @@ canvas{
 }
 
 
-.instructions{
-    margin-left: 20px;
-    margin-top: 20px;
-    -webkit-font-smoothing: antialiased;    
-    min-height: 75vh;
-    font-size: 1.1em;
-    height: 100%;
-    overflow-y: scroll;
-    padding-right: 20px;
-}
+
 
 
 .defination{
@@ -444,18 +422,7 @@ canvas{
     display: flex;
 }
 
-.support-main{
-    margin-left: 20px;
-    margin-top: 20px;
-    -webkit-font-smoothing: antialiased;    
-    min-height: 75vh;
-    font-size: 1.1em;
-    height: 100%;
-    overflow-y: scroll;
-    padding-right: 20px;
-    -webkit-font-smoothing: antialiased;
-    
-}
+
 
 .trainingButton{
     width: 100%;
@@ -527,4 +494,64 @@ canvas{
     padding-left: 32px;
     padding-right: 32px;
     text-align: center;
+}
+
+.scrollable-content{
+    overflow: hidden;
+    position: relative;
+}
+
+.instructions{
+    margin-left: 20px;
+    margin-top: 20px;
+    -webkit-font-smoothing: antialiased;    
+    font-size: 1.1em;
+    height: 100%;
+    overflow: auto;
+    position: relative;
+    padding-right: 20px;
+    min-height: 73vh;
+    max-height: 73vh;
+}
+
+.regression-main{
+    margin-left: 20px;
+    margin-top: 20px;
+    -webkit-font-smoothing: antialiased;
+    font-size: 1.1em;
+    height: 100%;
+    min-height: 73vh;
+    max-height: 73vh;
+    overflow: auto;
+    position: relative;
+    padding-right: 20px;
+}
+
+.support-main{
+    margin-left: 20px;
+    margin-top: 20px;
+    -webkit-font-smoothing: antialiased;    
+    font-size: 1.1em;
+    height: 100%;
+    min-height: 73vh;
+    max-height: 73vh;
+    overflow: auto;
+    position: relative;
+    padding-right: 20px;
+}
+
+
+mat-tab{
+    /* overflow: auto;
+    position: relative;
+    background-color: #ff5722; */
+}
+
+mat-slider{
+    width: 100%;
+}
+
+.intermediateCard{
+    box-shadow: none;
+    background-color: #212121;
 }

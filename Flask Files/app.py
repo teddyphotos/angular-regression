@@ -4,7 +4,6 @@ import urllib.request
 import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
-# from time import time
 
 
 app = Flask(__name__)
@@ -33,13 +32,9 @@ def printMyStuff():
     trainingX = np.array(JSONData['trainingX'])                            
     trainingY = np.array(JSONData['trainingY'])
     trainingX = trainingX.reshape(-1, 1)
-    trainingY = trainingY.reshape(-1, 1)           # Y true
+    trainingY = trainingY.reshape(-1, 1)           
     model = LinearRegression()
-    # t0 = time()
     model.fit(trainingX, trainingY)
-    # t1 = time()
-    # timetaken = t1-t0
-    # print("Time taken = ", timetaken)
     y_pred = model.predict(trainingX)
     variance = mean_squared_error(trainingY, y_pred)
     print("Varience ", variance, "std ", variance**(1/2))
