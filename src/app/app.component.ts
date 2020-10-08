@@ -70,8 +70,8 @@ export class AppComponent {
         this.plotResults(slope, intercept);
         this.resultSlope = data['coef'];
         this.resultIntercept = data['intercept'];
-        this.variance = data['variance'];
-        this.standardDeviation = data['standardDeviation'];
+        this.variance = data['variance'].toFixed(6);
+        this.standardDeviation = data['standardDeviation'].toFixed(6);
       },
       (error: any) => {
         let a = "Error ".concat(error.status).concat(": ").concat(error.name);
