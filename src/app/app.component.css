@@ -32,12 +32,7 @@ section{
 }
 
 
-.line-break{
-    width: 100%;
-    min-height: 1px;
-    background-color: #ffffff;
-    opacity: 0.2;
-}
+
 
 
 .in-landing-navbar{
@@ -72,13 +67,7 @@ mat-progress-bar{
         min-height: 92px;
         padding: 0px;
         display: flex;
-
-        
     }
-    .line-break{
-        opacity: 0.3;
-    }
-
 
     .landing-inner-content-center{
         flex: 1;
@@ -108,9 +97,7 @@ mat-progress-bar{
         display: flex;
         
     }
-    .line-break{
-        opacity: 0.2;
-    }
+    
     .brand{
         font-family: library3am;
         font-size: 1.2em;
@@ -296,7 +283,6 @@ mat-progress-bar{
     margin-bottom: 20px;
     margin-right: 20px;
     min-height: 50vh;   
-    /* margin-top: 12px;  */
 }
 
 
@@ -369,10 +355,9 @@ canvas{
     align-items: center;
 }
 
-
-.metrics{
-    box-shadow: none;
-    background-color: #272c34;
+.paymentOptions{
+    display: flex;
+    align-items: center;
 }
 
 
@@ -428,14 +413,9 @@ canvas{
     width: 100%;
 }
 
-.datametrics{
-    box-shadow: none;
-    background-color: #272c34;
-}
 
-.mat-input-wrapper {
-    background: gray;
-}
+
+
 
 .support-highlight-card{
     background-color: #212121;
@@ -450,7 +430,7 @@ canvas{
 }
 
 .support-message-main{
-    margin-top: 2px;
+    margin-top: 8px;
     line-height: 20px;
     font-family: Helvetica, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -466,34 +446,21 @@ canvas{
     font-family: Helvetica, sans-serif;
     -webkit-font-smoothing: antialiased;
 }
+
+
 .thanks-message{
-    
     margin-right: 6px;
     line-height: 30px;
     font-family: Helvetica, sans-serif;
     -webkit-font-smoothing: antialiased;
 }
 
+
 .thanks-heart{
     align-items: center;
     display: flex;
     font-family: Helvetica, sans-serif;
     -webkit-font-smoothing: antialiased;
-    
-}
-
-.slack-holder{
-    margin-top: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.other-info{
-    padding-top: 52px;
-    padding-left: 32px;
-    padding-right: 32px;
-    text-align: center;
 }
 
 .scrollable-content{
@@ -501,33 +468,7 @@ canvas{
     position: relative;
 }
 
-.instructions{
-    margin-left: 20px;
-    margin-top: 20px;
-    -webkit-font-smoothing: antialiased;    
-    font-size: 1.1em;
-    height: 100%;
-    overflow: auto;
-    position: relative;
-    padding-right: 20px;
-    min-height: 73vh;
-    max-height: 73vh;
-}
-
-.regression-main{
-    margin-left: 20px;
-    margin-top: 20px;
-    -webkit-font-smoothing: antialiased;
-    font-size: 1.1em;
-    height: 100%;
-    min-height: 73vh;
-    max-height: 73vh;
-    overflow: auto;
-    position: relative;
-    padding-right: 20px;
-}
-
-.support-main{
+.scrollable-container-holder{
     margin-left: 20px;
     margin-top: 20px;
     -webkit-font-smoothing: antialiased;    
@@ -538,20 +479,19 @@ canvas{
     overflow: auto;
     position: relative;
     padding-right: 20px;
-}
-
-
-mat-tab{
-    /* overflow: auto;
-    position: relative;
-    background-color: #ff5722; */
 }
 
 mat-slider{
     width: 100%;
 }
 
-.intermediateCard{
+
+.metrics{
     box-shadow: none;
-    background-color: #212121;
+    background-color: #272c34;
+}
+
+.support-mail-link{
+    color: #ff9800;
+    text-decoration: none;
 }
